@@ -64,8 +64,16 @@ impl Application {
 
 			let mut connection_env = HashMap::new();
 			connection_env.insert("STARDUST_STARTUP_TOKEN".to_string(), startup_token);
-			if let Ok(v) = env::var("WAYLAND_DISPLAY") {
-				connection_env.insert("WAYLAND_DISPLAY".to_string(), v);
+			// stardust-desktop: drop onto cylinder compositor when requested.
+			let wayland = match (
+				env::var("STARDUST_LAUNCH_TARGET").ok().as_deref(),
+				env::var("STARDUST_CYLINDER_WAYLAND_DISPLAY").ok(),
+			) {
+				(Some("cylinder"), Some(cyl)) if !cyl.is_empty() => cyl,
+				_ => env::var("WAYLAND_DISPLAY").unwrap_or_default(),
+			};
+			if !wayland.is_empty() {
+				connection_env.insert("WAYLAND_DISPLAY".to_string(), wayland);
 			}
 			if let Ok(v) = env::var("DISPLAY") {
 				connection_env.insert("DISPLAY".to_string(), v);

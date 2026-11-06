@@ -172,7 +172,16 @@ impl Reify for App {
 						move |state: &mut Self| {
 							let pos_vec = Vec3::from(state.pose.position);
 							if pos_vec.length() > ACTIVATION_DISTANCE {
-								// state.app.launch(launch_space)
+								let r = std::env::var("CYLINDER_RADIUS_M")
+									.ok()
+									.and_then(|v| v.parse::<f32>().ok())
+									.unwrap_or(0.70);
+								let xz = (pos_vec.x * pos_vec.x + pos_vec.z * pos_vec.z).sqrt();
+								if (xz - r).abs() < 0.25 {
+									unsafe { std::env::set_var("STARDUST_LAUNCH_TARGET", "cylinder"); }
+								} else {
+									unsafe { std::env::remove_var("STARDUST_LAUNCH_TARGET"); }
+								}
 								state.launched.store(true, Ordering::Relaxed);
 							} else {
 								state.pose = Posef::default();
