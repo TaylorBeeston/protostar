@@ -30,3 +30,4 @@ stardust-xr-asteroids = { workspace = true }
 tracing = "0.1.41"
 single = { path = "../single" }
 rayon = "1.11.0"
+palm-reach = { path = "../../stardust-desktop-wt/overnight/crates/palm-reach", features = ["asteroids"] }

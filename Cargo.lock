@@ -1407,6 +1407,7 @@ dependencies = [
  "glam",
  "manifest-dir-macros",
  "mint",
+ "palm-reach",
  "protostar",
  "rayon",
  "serde",
@@ -1969,6 +1970,17 @@ name = "owo-colors"
 version = "4.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c6901729fa79e91a0913333229e9ca5dc725089d1c363b2f4b4760709dc4a52"
+
+[[package]]
+name = "palm-reach"
+version = "0.1.0"
+dependencies = [
+ "derive-where",
+ "glam",
+ "stardust-xr-asteroids",
+ "stardust-xr-fusion",
+ "stardust-xr-molecules",
+]
 
 [[package]]
 name = "parking"
@@ -2838,8 +2850,7 @@ dependencies = [
 [[package]]
 name = "stardust-xr-asteroids"
 version = "0.53.0-rc.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e41518b9358c47f16bc0c174bcbe7f5d130deef014b22e0ddb14e929ba048a2"
+source = "git+https://github.com/StardustXR/asteroids.git#b7b2291a48641f3cd3ea203e45a109d31210a8bc"
 dependencies = [
  "bumpalo",
  "derive-where",
@@ -2856,12 +2867,23 @@ dependencies = [
  "ron",
  "rustc-hash 2.1.1",
  "serde",
+ "stardust-xr-asteroids-derive",
  "stardust-xr-fusion",
  "stardust-xr-molecules",
  "tokio",
  "tracing",
  "tracy-client",
  "zbus",
+]
+
+[[package]]
+name = "stardust-xr-asteroids-derive"
+version = "0.53.0-rc.1"
+source = "git+https://github.com/StardustXR/asteroids.git#b7b2291a48641f3cd3ea203e45a109d31210a8bc"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
