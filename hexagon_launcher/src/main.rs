@@ -6,7 +6,6 @@ use protostar::xdg::{DesktopFile, get_desktop_files};
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 use serde::{Deserialize, Serialize};
 use single::{APP_SIZE, App, BTN_COLOR, BTN_SELECTED_COLOR, MODEL_SCALE};
-use palm_reach::PalmGrabbable;
 use stardust_xr_asteroids::{
 	ClientState, Context, CustomElement, Element, Entity, Migrate, Reify, Tasker, Transformable,
 	client,
@@ -142,12 +141,6 @@ impl Reify for HexagonLauncher {
 					state.pose = pose;
 				})
 				.pointer_mode(PointerMode::Align),
-			)
-			.component(
-				PalmGrabbable::new(|state: &mut Self, pose| {
-					state.pose = pose;
-				})
-				.hit_radius(0.16),
 			)
 			.component(Containable::default())
 			.component(Poseable::new(|state: &mut Self, pose| {
